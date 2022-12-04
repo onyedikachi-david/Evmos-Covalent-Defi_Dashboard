@@ -1,0 +1,266 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Swaps (24 Hours)</h5>
+                  <span class="h2 font-weight-bold mb-0">{{ecosystem?.data?.items[0]?.total_swaps_24h}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                    <i class="fas fa-retweet"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Fees (24 hours)</h5>
+                  <span class="h2 font-weight-bold mb-0">{{ecosystem?.data?.items[0]?.total_fees_24h}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                    <i class="fas fa-burn"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Active Pairs (7d)</h5>
+                  <span class="h2 font-weight-bold mb-0">{{ecosystem?.data?.items[0]?.total_active_pairs_7d}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                    <i class="fas fa-users"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Volume (7d)</h5>
+                  <span class="h2 font-weight-bold mb-0">${{totalVolume}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                    <i class="fas fa-percent"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-6 mb-5 mb-xl-0">
+      <div class="card bg-gradient-default shadow">
+        <div class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+              <h2 class="text-white mb-0">Liquidity</h2>
+            </div>
+            <div class="col">
+              <ul class="nav nav-pills justify-content-end">
+                <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales"  (click)="updateOptions()">
+                  <a href="javascript:void(0)" class="nav-link py-2 px-3" [ngClass]="{'active':clicked===true}" data-toggle="tab" (click)="clicked=true;clicked1=false">
+                    <span class="d-none d-md-block">Month</span>
+                    <span class="d-md-none">M</span>
+                  </a>
+                </li>
+                <li class="nav-item" data-toggle="chart" data-target="#chart-sales"  (click)="updateOptions()">
+                  <a href="javascript:void(0)" class="nav-link py-2 px-3" [ngClass]="{'active':clicked1===true}" data-toggle="tab" (click)="clicked=false;clicked1=true">
+                    <span class="d-none d-md-block">Week</span>
+                    <span class="d-md-none">W</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Chart -->
+          <div class="chart">
+            <!-- Chart wrapper -->
+            <canvas id="chart-sales" class="chart-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-6 mb-5 mb-xl-0">
+      <div class="card bg-gradient-default shadow">
+        <div class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+              <h2 class="text-white mb-0">Volume</h2>
+            </div>
+            <div class="col">
+              <ul class="nav nav-pills justify-content-end">
+                <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#volume-chart"  (click)="updateVolumeOptions()">
+                  <a href="javascript:void(0)" class="nav-link py-2 px-3" [ngClass]="{'active':clicked2===true}" data-toggle="tab" (click)="clicked2=true;clicked3=false">
+                    <span class="d-none d-md-block">Month</span>
+                    <span class="d-md-none">M</span>
+                  </a>
+                </li>
+                <li class="nav-item" data-toggle="chart" data-target="#volume-chart"  (click)="updateVolumeOptions()">
+                  <a href="javascript:void(0)" class="nav-link py-2 px-3" [ngClass]="{'active':clicked3===true}" data-toggle="tab" (click)="clicked2=false;clicked3=true">
+                    <span class="d-none d-md-block">Week</span>
+                    <span class="d-md-none">W</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Chart -->
+          <div class="chart">
+            <!-- Chart wrapper -->
+            <canvas id="volume-chart" class="chart-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+ 
+  <div class="row mt-5">
+    <div class="col-xl-8 mb-5 mb-xl-0">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Top Tokens</h3>
+            </div>
+            <div class="col text-right">
+              <a routerLink="/tokens" class="btn btn-sm btn-primary">See all</a>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <!-- Projects table -->
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Index</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price(US$)</th>
+                <th scope="col">Liquidity(US$)</th>
+                <th scope="col">Volume(24 hrs)</th>
+                <th scope="col">Swaps (24 hrs)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of tokens; index as ind">
+                <th>{{ind+ 1}}</th>
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <a href="javascript:void(0)" title="{{item.contract_name}}" class="avatar rounded-circle mr-3">
+                      <img alt="{{item.contract_name}}" *ngIf="item?.logo_url?.length > 0" src="{{item.logo_url}}">
+                    </a>
+                    <a routerLink="/token/{{item.contract_address}}" title="{{item.contract_name}}">
+                      <div class="media-body">
+                        <span class="mb-0 text-sm" style="color:#525f7f;">{{item.contract_name}}</span><br/>
+                        <span class="text-warning mr-2"> {{item.contract_ticker_symbol}}</span>
+                      </div>
+                    </a>
+                    
+                  </div>
+                </th>
+                <th>{{item.quote_rate}}</th>
+                <th>{{getPrecision(item.total_liquidity, item.contract_decimals)}}</th>
+                <th>${{getPrecision(item.total_volume_24h, item.contract_decimals)}}</th>
+                <th>{{item.swap_count_24h}}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Top Pairs</h3>
+            </div>
+            <div class="col text-right">
+              <a routerLink="/pairs" class="btn btn-sm btn-primary">See all</a>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <!-- Projects table -->
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Pairs</th>
+                <th scope="col">Liquidity</th>
+                <th scope="col">Volume (24 hrs)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pool of pools">
+
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <div class="avatar-group">
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{pool?.token_0?.contract_name}}">
+                        <img  *ngIf="pool?.token_0?.logo_url?.length > 0" src="{{pool?.token_0?.logo_url}}">
+                      </a>
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{pool?.token_1?.contract_name}}">
+                        <img *ngIf="pool?.token_1?.logo_url?.length > 0" src="{{pool?.token_1?.logo_url}}">
+                      </a>
+                    </div>
+                    <a routerLink="/pairs/{{pool?.exchange}}">
+                      <div class="media-body">
+                        <span class="text-warning mr-2"> {{pool?.token_0?.contract_ticker_symbol}} <br/>{{pool?.token_1?.contract_ticker_symbol}}</span>
+                      </div>
+                    </a>
+                    
+                  </div>
+              </th>
+              <th>
+                ${{pool?.total_liquidity_quote}}
+              </th>
+              <th>
+                ${{pool?.volume_24h_quote}}
+              </th>
+              </tr>
+             
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

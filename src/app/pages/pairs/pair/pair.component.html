@@ -1,0 +1,62 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--7">
+   
+    <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-0">Transactions</h3>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Action</th>
+                    <th scope="col">Total Value</th>
+                    <th scope="col">Token amount</th>
+                    <th scope="col">Token amount</th>
+                    <th scope="col">Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tx of pools">
+    
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        
+                        <a href="https://etherscan.io/tx/{{tx.address}}" title="">
+                          <div class="media-body">
+                            <span class="text-warning mr-2"> {{tx?.act.replace('_', ' ')}} </span>
+                          </div>
+                        </a>
+                        
+                      </div>
+                  </th>
+                  <th>
+                      ${{tx?.total_quote}}
+                    </th>
+                    <th>
+                        ${{getPrecision(tx.amount_0, tx?.token_0?.contract_decimals)}}
+                    </th>
+                    <th>
+                        ${{getPrecision(tx.amount_1, tx?.token_1?.contract_decimals)}}
+                    </th>
+                  <th>
+                    {{getDateFromString(tx.block_signed_at)}}
+                  </th>
+                  </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  

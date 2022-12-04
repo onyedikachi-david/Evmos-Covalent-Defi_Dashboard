@@ -1,0 +1,71 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <h3 class="mb-0">Tokens</h3>
+          </div>
+          <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Index</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price(US$)</th>
+                  <th scope="col">Liquidity(US$)</th>
+                  <th scope="col">Volume(24 hrs)</th>
+                  <th scope="col">Swaps (24 hrs)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of tokens; index as ind">
+                  <th>{{(ind+ 1) + ((currentPageNo -1)*limit)}}</th>
+                  <th scope="row">
+                    <div class="media align-items-center">
+                      <a href="javascript:void(0)" title="{{item.contract_name}}" class="avatar rounded-circle mr-3">
+                        <img alt="{{item.contract_name}}" *ngIf="item?.logo_url?.length > 0" src="{{item.logo_url}}">
+                      </a>
+                      <a routerLink="/token/{{item.contract_address}}" title="{{item.contract_name}}">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm" style="color:#525f7f;">{{item.contract_name}}</span><br/>
+                          <span class="text-warning mr-2"> {{item.contract_ticker_symbol}}</span>
+                        </div>
+                      </a>
+                      
+                    </div>
+                  </th>
+                  <th>{{item.quote_rate}}</th>
+                  <th>{{getPrecision(item.total_liquidity, item.contract_decimals)}}</th>
+                  <th>${{getPrecision(item.total_volume_24h, item.contract_decimals)}}</th>
+                  <th>{{item.swap_count_24h}}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer py-4">
+            <nav aria-label="..." >
+              <ul class="pagination justify-content-end mb-0">
+                <li class="page-item">
+                    <button type="button" class="btn btn-secondary" (click)="prevPage()">Previous</button>
+                </li>
+                <li class="page-item">
+                    <button type="button" class="btn btn-secondary" (click)="nextPage()">Next</button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dark table -->
+    
+  </div>
+  

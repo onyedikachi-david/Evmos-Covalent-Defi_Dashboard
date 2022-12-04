@@ -1,0 +1,127 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <h3 class="mb-0">Token Pools</h3>
+          </div>
+          <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Pairs</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Fee (24 hrs)</th>
+                  <th scope="col">Swaps (24 hrs)</th>
+                  <th scope="col">Liquidity</th>
+                  <th scope="col">Volume (24 hrs)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pool of tokenPairs">
+  
+                  <th scope="row">
+                    <div class="media align-items-center">
+                      <div class="avatar-group">
+                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{pool?.token_0?.contract_name}}">
+                          <img  *ngIf="pool?.token_0?.logo_url?.length > 0" src="{{pool?.token_0?.logo_url}}">
+                        </a>
+                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{pool?.token_1?.contract_name}}">
+                          <img *ngIf="pool?.token_1?.logo_url?.length > 0" src="{{pool?.token_1?.logo_url}}">
+                        </a>
+                      </div>
+                      <a routerLink="/pair/{{pool?.exchange}}">
+                        <div class="media-body">
+                          <span class="text-warning mr-2"> {{pool?.token_0?.contract_ticker_symbol}} <br/>{{pool?.token_1?.contract_ticker_symbol}}</span>
+                        </div>
+                      </a>
+                      
+                    </div>
+                </th>
+                <th>
+                    ${{pool?.quote_rate}}
+                  </th>
+                  <th>
+                    ${{pool?.fee_24h_quote}}
+                  </th>
+                  <th>
+                    ${{pool?.swap_count_24h}}
+                  </th>
+                <th>
+                  ${{pool?.total_liquidity_quote}}
+                </th>
+                <th>
+                  ${{pool?.volume_24h_quote}}
+                </th>
+                </tr>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dark table -->
+    <br/>
+    <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-0">Transactions</h3>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Action</th>
+                    <th scope="col">Total Value</th>
+                    <th scope="col">Token amount</th>
+                    <th scope="col">Token amount</th>
+                    <th scope="col">Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tx of transactions">
+    
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        
+                        <a href="https://etherscan.io/tx/{{tx.address}}" title="">
+                          <div class="media-body">
+                            <span class="text-warning mr-2"> {{tx?.act.replace('_', ' ')}} </span>
+                          </div>
+                        </a>
+                        
+                      </div>
+                  </th>
+                  <th>
+                      ${{tx?.total_quote}}
+                    </th>
+                    <th>
+                        ${{getPrecision(tx.amount_0, tx?.token_0?.contract_decimals)}}
+                    </th>
+                    <th>
+                        ${{getPrecision(tx.amount_1, tx?.token_1?.contract_decimals)}}
+                    </th>
+                  <th>
+                    {{getDateFromString(tx.block_signed_at)}}
+                  </th>
+                  </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  
